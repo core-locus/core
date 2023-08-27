@@ -33,7 +33,7 @@
 *.app
 
 # Outputs
-dist/*
+**/dist/*
 
 #3rd party libraries
 vendor/**
