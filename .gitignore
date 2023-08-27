@@ -34,3 +34,6 @@
 
 # Outputs
 dist/*
+
+#3rd party libraries
+vendor/**
