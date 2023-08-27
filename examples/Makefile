@@ -1,7 +1,16 @@
 PROJECT ?= Sandbox
 
+# List of include directories
+INCLUDE_DIRS := \
+    ../vendor/spdlog/include \
+    ../src
+
+# Convert the list of include directories to -I flags
+INCLUDE_FLAGS := $(addprefix -I, $(INCLUDE_DIRS))
+
+# Combine include flags with other compiler flags
 CC := g++
-CFLAGS := -std=c++11 -Wall -Wextra
+CFLAGS := -std=c++11 -Wall -Wextra $(INCLUDE_FLAGS)
 
 # Architecture specific settings
 ifeq ($(shell uname), Linux)
@@ -20,7 +29,6 @@ ROOTDISTDIR := $(PROJECT)/dist
 BUILDDIR := $(ROOTBUILDDIR)/$(OS)
 DISTDIR := $(ROOTDISTDIR)/$(OS)
 TARGET := $(DISTDIR)/$(PROJECT)
-INCLUDES := ../src
 LIBRARYS := ../build/$(OS)/**/*.o
 
 SRCEXT := cpp
@@ -36,7 +44,7 @@ $(TARGET): $(OBJECTS)
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	@echo "Compiling $<..."
-	$(CC) -I $(INCLUDES) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "Cleaning..."

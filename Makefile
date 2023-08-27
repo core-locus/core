@@ -18,6 +18,7 @@ ROOTDISTDIR := dist
 BUILDDIR := $(ROOTBUILDDIR)/$(OS)
 DISTDIR := $(ROOTDISTDIR)/$(OS)
 TARGET := $(DISTDIR)/core-engine
+INCLUDES := ./vendor/spdlog/include
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -32,7 +33,7 @@ $(TARGET): $(OBJECTS)
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
 	@echo "Compiling $<..."
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -I $(INCLUDES) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "Cleaning..."
