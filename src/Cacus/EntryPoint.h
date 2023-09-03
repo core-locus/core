@@ -18,7 +18,7 @@ int main (int argc, char** argv)
     Cacus::Log::Init();
     CCS_CORE_WARN("Initialized Log");
     int a = 5;
-    CCS_INFO("Hello, World! {0}", a);
+    CCS_INFO("Hello, World! {0}", "Wylie!");
 
     auto app = Cacus::CreateApplication();
     app->Run();
