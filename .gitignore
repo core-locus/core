@@ -38,3 +38,6 @@
 
 #3rd party libraries
 vendor/**
+
+# Generated Makefiles
+Makefile
