@@ -10,3 +10,5 @@
 #else
     #define CACUS_API
 #endif
+
+#define BIT(x) (1 << x)
