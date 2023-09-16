@@ -35,9 +35,10 @@
 # Outputs
 **/dist/*
 **/bin/*
+**/bin-int/*
 
 #3rd party libraries
-vendor/**
+*/vendor/**
 
 # Generated Makefiles
 Makefile
