@@ -19,6 +19,9 @@ project "Cacus"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "ccspch.h"
+    pchsource "src/%{prj.name}/ccspch.cpp"
+
     files
     {
         "src/%{prj.name}/**.h",
@@ -27,6 +30,7 @@ project "Cacus"
 
     includedirs
     {
+        "src",
         "src/vendor/spdlog/include"
     }
 
@@ -61,10 +65,13 @@ project "Sandbox"
     location "examples/%{prj.name}"
     kind "ConsoleApp"
     language "C++"
-    cppdialect "C++11"
+    cppdialect "C++17"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "ccspch.h"
+    pchsource "src/Cacus/ccspch.cpp"
 
     files
     {
@@ -74,8 +81,8 @@ project "Sandbox"
 
     includedirs
     {
-        "src/vendor/spdlog/include",
-        "src"
+        "src",
+        "src/vendor/spdlog/include"
     }
 
     links

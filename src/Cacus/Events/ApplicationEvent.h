@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 // WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 namespace Cacus
 {

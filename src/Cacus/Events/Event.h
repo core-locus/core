@@ -2,9 +2,6 @@
 
 #include "../Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Cacus
 {
     // Events are currently blocking, a better approach would be to buffer events in an event bus

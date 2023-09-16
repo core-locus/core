@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Cacus
 {
     class CACUS_API MouseMovedEvent : public Event
