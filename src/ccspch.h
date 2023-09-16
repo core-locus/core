@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Cacus/Log.h"
+
 #ifdef _WIN32
     #include <Windows.h>
 #endif

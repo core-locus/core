@@ -9,14 +9,17 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug)
+  GLFW_config = debug
   Cacus_config = debug
   Sandbox_config = debug
 
 else ifeq ($(config),release)
+  GLFW_config = release
   Cacus_config = release
   Sandbox_config = release
 
 else ifeq ($(config),dist)
+  GLFW_config = dist
   Cacus_config = dist
   Sandbox_config = dist
 
@@ -24,13 +27,19 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := Cacus Sandbox
+PROJECTS := GLFW Cacus Sandbox
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-Cacus:
+GLFW:
+ifneq (,$(GLFW_config))
+	@echo "==== Building GLFW ($(GLFW_config)) ===="
+	@${MAKE} --no-print-directory -C src/vendor/glfw -f Makefile config=$(GLFW_config)
+endif
+
+Cacus: GLFW
 ifneq (,$(Cacus_config))
 	@echo "==== Building Cacus ($(Cacus_config)) ===="
 	@${MAKE} --no-print-directory -C src -f Makefile config=$(Cacus_config)
@@ -43,6 +52,7 @@ ifneq (,$(Sandbox_config))
 endif
 
 clean:
+	@${MAKE} --no-print-directory -C src/vendor/glfw -f Makefile clean
 	@${MAKE} --no-print-directory -C src -f Makefile clean
 	@${MAKE} --no-print-directory -C examples/Sandbox -f Makefile clean
 
@@ -57,6 +67,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   GLFW"
 	@echo "   Cacus"
 	@echo "   Sandbox"
 	@echo ""

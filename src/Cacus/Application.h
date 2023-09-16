@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Events/Event.h"
+#include "Window.h"
 
 namespace Cacus
 {
@@ -14,6 +15,9 @@ namespace Cacus
         void Run();
 
         // To be defined by client
+    private:
+        std::unique_ptr<Window> m_Window;
+        bool m_Running = true;
     };
     
     Application* CreateApplication();

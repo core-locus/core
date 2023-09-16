@@ -10,6 +10,12 @@ workspace "Cacus"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include Directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "src/vendor/GLFW/include"
+
+include "src/vendor/GLFW"
+
 project "Cacus"
     location "src"
     kind "SharedLib"
@@ -25,13 +31,25 @@ project "Cacus"
     files
     {
         "src/%{prj.name}/**.h",
-        "src/%{prj.name}/**.cpp"
+        "src/%{prj.name}/**.cpp",
+        "src/Platform/**.h",
+        "src/Platform/**.cpp"
     }
 
     includedirs
     {
         "src",
-        "src/vendor/spdlog/include"
+        "src/%{prj.name}",
+        "src/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+    
+    links 
+    {
+        "GLFW",
+        "OpenGL.framework",
+        "Cocoa.framework",
+        "IOKit.framework",
     }
 
     filter "system:windows"
@@ -43,6 +61,11 @@ project "Cacus"
         {
             "CCS_PLATFORM_WINDOWS",
             "CCS_BUILD_DLL"
+        }
+
+        links
+        {
+            "opengl32.lib"
         }
 
     filter "system:macos"
