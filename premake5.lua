@@ -74,14 +74,17 @@ project "Cacus"
 
     filter "configurations:Debug"
         defines "CCS_DEBUG"
+        -- buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "CCS_RELEASE"
+        -- buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "CCS_DIST"
+        -- buildoptions "/MD"
         optimize "On"
 
 project "Sandbox"
@@ -104,8 +107,8 @@ project "Sandbox"
 
     includedirs
     {
-        "src",
-        "src/vendor/spdlog/include"
+        "src/vendor/spdlog/include",
+        "src"
     }
 
     links
@@ -129,12 +132,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "CCS_DEBUG"
+        -- buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "CCS_RELEASE"
+        -- buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "CCS_DIST"
+        -- buildoptions "/MD"
         optimize "On"
