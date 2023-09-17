@@ -73,6 +73,20 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "version": "cpp"
+        "version": "cpp",
+        "__std_stream": "cpp",
+        "__verbose_abort": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "condition_variable": "cpp",
+        "deque": "cpp",
+        "format": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "regex": "cpp",
+        "span": "cpp",
+        "stack": "cpp",
+        "thread": "cpp",
+        "unordered_set": "cpp"
     }
 }

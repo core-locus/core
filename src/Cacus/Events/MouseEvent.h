@@ -26,10 +26,10 @@ namespace Cacus
         float m_MouseX, m_MouseY;
     };
 
-    class CACUS_API MouseScrolled : public Event
+    class CACUS_API MouseScrolledEvent : public Event
     {
     public:
-        MouseScrolled(float xOffset, float yOffset )
+        MouseScrolledEvent(float xOffset, float yOffset )
             : m_XOffset(xOffset), m_YOffset(yOffset) {}
 
         inline float GetXOffset() const { return m_XOffset; }
