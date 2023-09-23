@@ -1,11 +1,12 @@
 #include "ccspch.h"
 #include "Application.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Cacus
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
     Application::Application()
     {
         m_Window = std::unique_ptr<Window>(Window::Create());

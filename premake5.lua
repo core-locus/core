@@ -13,8 +13,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include Directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "src/vendor/GLFW/include"
+IncludeDir["Glad"] = "src/vendor/Glad/include"
 
 include "src/vendor/GLFW"
+include "src/vendor/Glad"
 
 project "Cacus"
     location "src"
@@ -41,15 +43,19 @@ project "Cacus"
         "src",
         "src/%{prj.name}",
         "src/vendor/spdlog/include",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
     }
-    
+
     links 
     {
         "GLFW",
-        "OpenGL.framework",
-        "Cocoa.framework",
-        "IOKit.framework",
+        "Glad",
+    }
+
+    defines
+    {
+        "GLFW_INCLUDE_NONE",
     }
 
     filter "system:windows"
@@ -68,9 +74,15 @@ project "Cacus"
             "opengl32.lib"
         }
 
-    filter "system:macos"
+    filter "system:macosx"
         staticruntime "On"
-        systemversion "latest"
+
+        links 
+        {
+            "OpenGL.framework",
+            "Cocoa.framework",
+            "IOKit.framework",
+        }
 
     filter "configurations:Debug"
         defines "CCS_DEBUG"
@@ -108,6 +120,7 @@ project "Sandbox"
     includedirs
     {
         "src/vendor/spdlog/include",
+        "src/vendor",
         "src"
     }
 

@@ -10,16 +10,19 @@ endif
 
 ifeq ($(config),debug)
   GLFW_config = debug
+  Glad_config = debug
   Cacus_config = debug
   Sandbox_config = debug
 
 else ifeq ($(config),release)
   GLFW_config = release
+  Glad_config = release
   Cacus_config = release
   Sandbox_config = release
 
 else ifeq ($(config),dist)
   GLFW_config = dist
+  Glad_config = dist
   Cacus_config = dist
   Sandbox_config = dist
 
@@ -27,7 +30,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := GLFW Cacus Sandbox
+PROJECTS := GLFW Glad Cacus Sandbox
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -36,10 +39,16 @@ all: $(PROJECTS)
 GLFW:
 ifneq (,$(GLFW_config))
 	@echo "==== Building GLFW ($(GLFW_config)) ===="
-	@${MAKE} --no-print-directory -C src/vendor/glfw -f Makefile config=$(GLFW_config)
+	@${MAKE} --no-print-directory -C src/vendor/GLFW -f Makefile config=$(GLFW_config)
 endif
 
-Cacus: GLFW
+Glad:
+ifneq (,$(Glad_config))
+	@echo "==== Building Glad ($(Glad_config)) ===="
+	@${MAKE} --no-print-directory -C src/vendor/Glad -f Makefile config=$(Glad_config)
+endif
+
+Cacus: GLFW Glad
 ifneq (,$(Cacus_config))
 	@echo "==== Building Cacus ($(Cacus_config)) ===="
 	@${MAKE} --no-print-directory -C src -f Makefile config=$(Cacus_config)
@@ -52,7 +61,8 @@ ifneq (,$(Sandbox_config))
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C src/vendor/glfw -f Makefile clean
+	@${MAKE} --no-print-directory -C src/vendor/GLFW -f Makefile clean
+	@${MAKE} --no-print-directory -C src/vendor/Glad -f Makefile clean
 	@${MAKE} --no-print-directory -C src -f Makefile clean
 	@${MAKE} --no-print-directory -C examples/Sandbox -f Makefile clean
 
@@ -68,6 +78,7 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   GLFW"
+	@echo "   Glad"
 	@echo "   Cacus"
 	@echo "   Sandbox"
 	@echo ""

@@ -5,6 +5,8 @@
 #include "Cacus/Events/KeyEvent.h"
 #include "Cacus/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Cacus
 {
     static bool s_GLFWInitialized = false;
@@ -47,8 +49,17 @@ namespace Cacus
             s_GLFWInitialized = true;
         }
 
+        // Request an OpenGL 4.1 core profile context
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
+
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        CCS_CORE_ASSERT(status, "Failed to initialize Glad!");
+
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
 

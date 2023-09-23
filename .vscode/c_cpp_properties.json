@@ -7,6 +7,7 @@
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/src/vendor/spdlog/include",
                 "${workspaceFolder}/src/vendor/glfw/include",
+                "${workspaceFolder}/src/vendor/glad/include",
             ],
             "macFrameworkPath": [
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
